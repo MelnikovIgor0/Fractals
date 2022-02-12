@@ -1,0 +1,64 @@
+﻿<Window x:Class="WpfAppPeerGradeFractals.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppPeerGradeFractals"
+        mc:Ignorable="d"
+        Title="Fractals" Height="540" Width="960" MinHeight="540" MinWidth="960" SizeChanged="Window_SizeChanged"
+        KeyDown="TheCanvas_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0">
+            <Canvas x:Name="theCanvas" Grid.Column="0" Grid.Row="1" Background="#FFFFFF"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom"/>
+            <Menu DockPanel.Dock="Top" Height="20">
+                <MenuItem Header="ПОМОЩЬ" HorizontalAlignment="Center" x:Name="menuItemHelp" 
+                          Click="menuItemHelp_Click"></MenuItem>
+            </Menu>
+        </DockPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Background="#BBBBBB" HorizontalAlignment="Stretch">
+            <TextBlock Margin="0,15,300,0" HorizontalAlignment="Right">Тип фрактала</TextBlock>
+            <ComboBox x:Name="theComboBox" Width="250" Height="25" HorizontalAlignment="Right" Margin="0,-20,20,0"
+                      SelectionChanged="TheComboBox_SelectionChanged">
+                <ComboBoxItem Content="Обдуваемое ветром дерево Пифагора" x:Name="Fract1"></ComboBoxItem>
+                <ComboBoxItem Content="Кривая Коха" x:Name="Fract2"></ComboBoxItem>
+                <ComboBoxItem Content="Ковер Серпинского" x:Name="Fract3"></ComboBoxItem>
+                <ComboBoxItem Content="Треугольник Серпинского" x:Name="Fract4"></ComboBoxItem>
+                <ComboBoxItem Content="Множество Кантора" x:Name="Fract5"></ComboBoxItem>
+            </ComboBox>
+            <TextBlock Margin="0,10,280,0" HorizontalAlignment="Right" x:Name="textBlockSize">
+                Масштаб (100%)</TextBlock>
+            <Slider Orientation="Horizontal" HorizontalAlignment="Right" Minimum="0.1" Maximum="1" Width="250" 
+                    Margin="0,-16,20,0" x:Name="sliderSize" ValueChanged="sliderSize_ValueChanged"/>
+            <TextBlock Margin="0,5,280,0" HorizontalAlignment="Right" x:Name="textBlockElongation">
+                Коэффициент длины дочернего элемента (0)</TextBlock>
+            <Slider Orientation="Horizontal" HorizontalAlignment="Right" Minimum="0.1" Maximum="0.8" Width="250" 
+                    Margin="0,-15,20,0" x:Name="sliderPart" ValueChanged="sliderPart_ValueChanged" />
+
+            <TextBlock Margin="10,-41,0,-2" HorizontalAlignment="Left" x:Name="textBlockLeft">
+                Левый угол отклонения (0)</TextBlock>
+            <Slider Orientation="Horizontal" HorizontalAlignment="Left" Minimum="0" Maximum="1.57079" Width="150" 
+                    Margin="190,-41,540,0" x:Name="sliderLeftAngle" ValueChanged="sliderLeftAngle_ValueChanged" />
+            <TextBlock Margin="10,-19,0,-2" HorizontalAlignment="Left" x:Name="textBlockRight">
+                Правый угол отклонения (0)</TextBlock>
+            <Slider Orientation="Horizontal" HorizontalAlignment="Left" Minimum="0" Maximum="1.57079" Width="150" 
+                    Margin="190,-18,540,0" x:Name="sliderRightAngle" ValueChanged="sliderRightAngle_ValueChanged" />
+            <TextBlock Margin="10,-74,0,0" HorizontalAlignment="Left" x:Name="textBlockRecursion">
+                Глубина отрисовки (0)</TextBlock>
+            <Slider Orientation="Horizontal" HorizontalAlignment="Left" Minimum="1" Maximum="12" Width="250" 
+                    Margin="190,-74,0,94" x:Name="sliderRecursionDepth" 
+                    ValueChanged="sliderRecursionDepth_ValueChanged"/>
+            <!-->Я понимаю, что это очень некрасивый вариант расположения кнопок, особенно при изменении размера окна,
+            но у меня нет идей куда эти кнопки еще можно запихать. А еще у меня лапки.<!-->
+            <Button Margin="70,-205,0,0" Width="120" Height="25" Content="задать градиент" x:Name="buttonGradient" 
+                    Click="buttonGradient_Click"></Button>
+            <Button Height="25" Width="150" Content="Сохранить изображение" Margin="-110,-145,0,0" x:Name="buttonSave"
+                    Click="buttonSave_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
